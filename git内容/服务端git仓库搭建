@@ -1,0 +1,51 @@
+git在服务端搭建：
+安装git		yum install -y git
+查看git版本	git --version
+创建git用户	useradd git
+设置git用户密码	passwd git
+创建服务端git仓库并修改git仓库的所属者为git用户：
+设置/data/git/adam.git为Git仓库
+mkdir -p /data/git/adam.git
+git init --bare /data/git/adam.git
+chown -R git:git adam.git
+克隆远程仓库
+git clone git@127.0.0.1:/data/git/adam.git
+服务端git打开RSA验证：
+vi /etc/ssh/sshd_config 打开下面几个配置：
+RSAAuthentication yes
+PubkeyAuthentication yes
+AuthorizedKeysFile .ssh/authorized_keys
+重启sshd服务		/etc/rc.d/init.d/sshd restart
+在/home/git下创建目录.ssh		mkdir .ssh
+修改权限为git		chown -R git:git .ssh
+将客户端公钥导入服务器端 /home/git/.ssh/authorized_keys 文件
+ssh git@127.0.0.1 'cat >> .ssh/authorized_keys' < ~/.ssh/id_rsa.pub
+修改.ssh目录的权限为700
+chmod 700 .ssh
+修改authorized_keys文件的权限为600
+chmod 600 authorized_keys
+禁止git用户ssh登录服务器
+vi /etc/passwd
+找到：git:x:502:504::/home/git:/bin/bash
+修改为：git:x:502:504::/home/git:/bin/git-shell
+
+钩子使用：
+在hooks文件夹下创建post-receive文件并修改为可执行脚本，写入下面代码（认真看一下）：
+#!/bin/bash
+cd /data/wwwroot/yuyue.jgyljt.com
+unset GIT_DIR
+git config --list
+git pull origin master
+ 在/data/wwwroot/adamdir下先要把这个目录初始化为git工作区（git init）然后绑定远程仓库git remote add origin git@127.0.0.1:/data/git/adam.git
+最后执行post-receive开始拉取
+
+
+
+
+
+
+
+
+
+
+
