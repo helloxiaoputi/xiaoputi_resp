@@ -31,6 +31,10 @@ git reset HEAD 文件
 删除文件：
 当我们commit一个文件到git分支的时候，后期把该文件从工作区中删除了，如果是确实要进行删除，那分支中还存在该文件，而工作区中不存在该文件则产生差别，所以要把分支中的该文件也进行删除使用 git rm 文件名  并可以commit一下说明
 如果是误删，则可以从分支上恢复到工作区  git checkout -- 文件
+删除远程上的文件
+git rm -r --cached a/2.txt                    // 删除a目录下的2.txt文件 
+git commit -m  "删除a目录下的2.txt文件"  // commit
+git push 
 添加远程库：
 首先在github上拥有账号并创建一个版本库（repository），会有提示的命令
 在对应工作区中执行：
