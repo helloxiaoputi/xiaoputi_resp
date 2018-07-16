@@ -1,0 +1,341 @@
+python抓取数据
+
+python使用开发工具：PyCharm,IDLE
+linux系统一般自带python指令，Windows则需要简单安装。
+执行python文件与执行shell脚本一样  使用 ./后跟文件名称。
+如果脚本中需要输入中文的话需引用:     # -*- coding: UTF-8 -*-
+python变量：
+不需要定义类型   例如   a=1表示int型；a=1.12表示float型。
+可以使用type(n)查看变量类型；
+del 变量名     可以删除对应的变量
+'+'符号表示字符串拼接   '*'表示字符串复制：例子：
+str = 'Hello,World!'
+print str * 2;print str + 'pingjie';
+获取指定变量中的字符串：例子：
+str = 'ilovepython';
+print str[1:5];
+python列表：（类似数组）：看例子：
+列表的定义形式：
+list = ['runoob',786,2.23,'john',70.2];
+tinylist = [123,john];
+元组的定义形式：
+list = （'runoob',786,2.23,'john',70.2）;
+tinylist = （123,john）;
+print list;
+print list[0];
+print list[1:3];
+print list[2:];
+print tinylist * 2;
+print list + tinylist;
+python元组：（类似数组）：例子与上述一直只需要把[]改为()即可，元组定义后不可再次赋值，相当于可读的内容。
+python字典：（类似数组）：看例子：
+dict = {};
+dict['one'] = 'this is one';
+dict[2] = 'this is two';
+tinydict = {'name':'john','code':'6743','dept':'salts'};
+print dict['one'];
+print dict[2];
+print tinydict;
+print tinydict.keys();
+print tinydict.values();
+获取字典里的值可以使用get方法，如dict.get('name','默认值')，如果name键不存在则返回默认值。
+判断变量类型是不是指定的类型：isinstance(adam1，adam2) 返回true或false
+例子:
+a=1;
+print isinstance(a,int);
+运算符：
+算数运算符：
++，-，*，/，%  加减乘除取余用法与php一致。
+x**y :表示x的y次幂。9//2:表示取整数，结果为4  。
+比较运算符：
+==，！=，<>，>，<，>=，<=  
+等于，不等于，不等于，大于，小于，大于等于，小于等于用法与php一致。
+赋值运算符：
+=，+=，-=，*=，/=，%=，**=，//=   用法与php一致。
+逻辑运算符：
+and，or，not 用法与php的&&，||，！一致。
+成员运算符：
+in，not in
+例子：(注意print前的四个空格)
+a = 10;
+b = 2;
+list = [1,2,3,4,5];
+if(a in list):
+    print 'a is in list';
+else:
+    print 'a is not in list';
+if(b not in list):
+    print 'b is not in list';
+else:
+    print 'b is in list';
+身份运算符：
+is，is not    （值和类型必须一致）相当于php中的  ===  和  !==
+例子：（注意print前的四个空格，如果输入中文需要中文包）
+a=20;
+b=20;
+if(a is b):
+    print '11';
+else:
+    print '22';
+b=float(20);
+if(a is not b):
+    print '11';
+else:
+    print '22';
+条件语句：
+if 条件: 
+    代码块; 
+elif 条件：
+    代码块;
+else:
+    代码块;
+循环语句：
+while循环：例子：
+count=0;
+while count<10:'name': std.name,
+    count+=1;
+while循环两个重要命令continue和break
+continue演示：
+i=1;
+while i<10:
+    i+=1;
+    if i%2>0:
+        continue;
+    print i;
+break演示：
+i=1;
+while i:
+    i+=1;
+    print i;
+    if i>10:
+        break;
+while ... else ... 语句：当while后的条件不满足时执行else后的代码块
+while 条件 :
+     代码块;
+else:
+    代码块; 
+for循环：可以遍历字符串和列表：例子：
+遍历字符串：
+for letter in 'Python'
+    print letter;
+遍历列表
+lists = ['marry','adam','kitty'];
+for name in lists:
+    print name;
+使用索引遍历：例子：
+fruits = ['banana','apple','mango'];
+for index in range(len(fruits)):
+    print fruits[index];
+len()返回序列长度    range()返回一个序列的数也就是多个下标
+日期和时间：
+import time;
+time.sleep()   time挂起的时间
+输出当前时间戳：time.time();
+格式化2017-12-03 15：50：29形式：
+time.strftime("%Y-%m-%d %H:%M:%S",time.localtime())
+转换为时间戳格式
+a = "Sat Mar 28 22:24:24 2016"
+time.mktime(time.strptime(a,'%a %b %d %H:%M:%S %Y'))
+函数：（函数定义以def开头）：格式：
+定义函数：
+def 函数名(参数1):
+    代码块;
+调用函数：
+函数名(参数1);
+模块：
+定义模块：模块是一个以py结尾的文件 如：support.py
+引用整个模块：在文件最开端引用模块：import support
+引用某个模块中的一个函数：from 模块名 import 函数名
+导入某个模块中的所有函数：from 模块名 import *
+例子：
+文件名：
+support.py
+文件内的函数：
+def print_func( par ):
+   print "Hello : ", par
+引入文件：import support
+调用函数：support.print_func('lin')
+文件I/O:
+读取键盘输入：  raw_input()        input()
+两者区别：input可以输入python表达式儿raw_input则不行
+raw_input()例子：
+a = raw_input('请输入:');
+print '您输入的是:', a;
+如果输入10对应会打印出10
+input()例子:
+a = input('请输入:');
+print '您输入的是:', a;
+如果输入表达式 ：[x*5 for x in range(2,10,2)]
+会输出:您输入的是：[10,20,30,40]
+打开和关闭文件：
+打开：open(文件路径，打开模式，缓存设置)
+打开模式(可选)：如：wb：以二进制方式打开可写入
+缓存设置(可选)：设为0不开启，设为1开启。大于1缓存区大小，小于1系统默认大小
+例子：
+fileobj = file('foo.txt','wb');
+print "文件名:",fileobj.name;
+print "文件是否已关闭:",fileobj.closed;
+print "文件访问模式:",fileobj.mode;
+关闭：fileobj.close();
+使用 with open(...) as fileobj : 可以在代码块执行完毕后自动调用fileobj .close()方法
+file打开的对象还有存在的方法:
+fileobj.flush()    刷新文件内部缓存
+fileobj.isatty()    检测文件是否连接到一个终端上，如果连接上了返回true否则返回false
+fileobj.readline()  每次读取一行
+fileobj.readlines()  读取多行并按行返回list列表
+fileobj.writelines()   向文件中写入一个序列，如果需要换行可以自己加换行符号\n
+文件read()和write()方法：
+read()方法:read后的参数表示读取的字节数，如果不写默认全读
+fileobj = open('foo.txt','r+');
+str = fileobj.read(10);
+print str;
+fileobj.close();   
+write()方法:
+例子:
+fileobj = open('foo.txt','wb');
+fileobj.write("www.runoob.com!\nVery good site!\n");
+fileobj.close();
+文件定位：
+tell()：返回文件指针的当前位置
+seek(offset,[from]):改变指针的位置,offset表示要移动的字节数，from表示移动自己的参考位置，from设为0表示指针移动文件开头，设为1表示指针在当前位置，设为2表示指针移到文件最后。
+例子：
+import os
+文件重命名：os.rename('原文件名','新文件名');
+删除文件：os.remove('文件名');
+显示将要创建目录的位置：os.path.join('/data/python','testdir');
+创建目录：os.mkdir('test');
+获取当前目录：os.getcwd();
+获取当前目录的绝对路径：os.path.abspath('.');
+删除目录：os.rmdir('目录位置');
+获取系统信息：os.uname();
+获取系统定义的环境变量：os.environ;
+拆分路径：os.path.split('路径');
+得到文件扩展名：os.path.splitext('文件路径');
+
+异常处理：
+格式1：(执行try中内容，出现异常名称类型的错误会对应抛出,如果无异常则执行else)
+try:
+    代码块;
+except [异常名称]:
+    代码块;
+else:
+    代码块;
+格式2：(try-finally语句无论是否发生异常都将执行最后的代码)
+try:
+    代码块;
+finally:
+    代码块;
+raise;
+格式3：(手动抛出异常后，后面的代码块将不再执行)
+raise Exception();
+python面向对象类似php，只是改变了格式;
+python正则表达式：（不是很懂需要研究） 需要引入re模块
+存在方法：match()    search()   sub()
+
+向内存中存取字符串：StringIO():
+from io import StringIO
+strobj = StringIO('aaaaaa')
+print strobj.readline()
+如果不是字符串操作二进制数据则使用BytesIO();
+from io import BytesIO
+byteobj = BytesIO();
+byteobj.write('你好世界'.encode('utf-8'));
+print (f.getvalues())
+
+序列化：我们把变量从内存中变成可存储或传输的过程称之为序列化
+python使用pickle模块来实现序列化
+例子：
+序列化：dump()
+import pickle
+dict={'name':'bill','age':24,'score':88}  
+f=open('test.txt','wb')
+pickle.dump(dict,f)
+反序列化：load()
+
+将python对象变成一个json对象
+import json
+d={'name':'bill','age':24,'score':88} 
+print json.dumps(d)
+json字符串变成一个python对象
+json.loads(json字符串);
+python也可以将一个实例对象转换为json对象（比较麻烦）例子：
+class Student(object):
+    def __init__(self, name, age, score):
+        self.name = name
+        self.age = age
+        self.score = score
+def student2dict(std):
+    return {'name': std.name,'age': std.age,'score': std.score }
+s = Student('Bob', 20, 88)
+print(json.dumps(s,default=student2dict))
+单进程：
+from multiprocessing import Process
+import os
+# 子进程要执行的代码
+def run_proc(name):
+    print('Run child process %s (%s)...' % (name, os.getpid()))
+if __name__=='__main__':   
+#表示如果__name__等于自己的话就执行，默认自己是__main__
+    print('Parent process %s.' % os.getpid())
+    p = Process(target=run_proc, args=('test',))
+    print('Child process will start.')
+    p.start()
+    p.join()
+    print('Child process end.')
+多进程：引入模块Pool使用进程池
+from multiprocessing import Pool
+import random,time,os
+def long_time_task(name):
+    print('Run task %s (%s)...' % (name, os.getpid()))
+    start = time.time()
+    time.sleep(random.random() * 3)
+    end = time.time()
+    print('Task %s runs %0.2f seconds.' % (name, (end - start)))
+if __name__=='__main__':
+    print('Parent process %s.' % os.getpid())      #父进程id
+    p = Pool(4)    #进程池一次性执行4个进程
+    for i in range(5):
+        p.apply_async(long_time_task, args=(i,))    
+#使用apply_async(方法名,参数)从进程池中调用子进程来执行
+    print('Waiting for all subprocesses done...')
+    p.close()
+    p.join()   #子进程都结束了执行后面的内容，使用join()方法前面必须加上close()方法
+    print('All subprocesses done.')
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
