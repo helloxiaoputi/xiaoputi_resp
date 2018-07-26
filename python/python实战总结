@@ -1,0 +1,76 @@
+1.	获取页面html	urllib2
+	headers={'User-Agent':'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_13_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/67.0.3396.99 Safari/537.36'}
+	req=urllib2.Request(url='',headers=headers)
+	res=urllib2.urlopen(req,timeout=5)
+	html=res.read()
+2.	获取命令行参数 sys
+	sys.argv[i]		i=0表示获取脚本名字，i=1表示获取第一个参数
+3.	获取用户输入参数
+	searchword=raw_input(unicode('输入搜索词：','utf-8'))
+4.	获取远程json文件内容为html并写入新的文件中	json
+	使用获取页面html方法先取得内容
+	filename='config.json'
+	with open(filename,'w') as f:
+		f.write(html)
+5.	使用线程	threading
+	1.创建线程	thread1=myThread(arg1,arg2)
+	2.开启线程	thread1.start()
+	3.线程走向：
+	class myThread (threading.Thread):
+		def __init__(self,arg1,arg2):
+			threading.Thread.__init__(self)
+			self.arg1=arg1	获取参数
+		def run(self):	重写run方法
+			self.arg1	使用参数
+6.	读取json文件	json
+	jsonData=open('config.json','rb').read()
+	dataList=json.loads(jsonData)
+	for rowindex in dataList:
+		dataList[rowindex]	json项值
+7.	字符串根据某个字符剪切成列表
+	strlist=str1.split(',')
+8.	获取页面模块信息	from pyquery import PyQuery as pq
+	url=link.decode('gbk')
+	d=pq(url=url)
+	obj=pq(d("#aaa").html())
+	for i in obj.items('.res.res1'):	查找id=aaa下class=res res1的模块项
+		alink=i.find('a').attr('href')	获取模块下的a链接
+9.	请求页面信息或者获取页面信息，一般用来执行接口	requests
+	headers = {'user-agent': 'my-app/0.0.1'}	伪装头信息
+	response=requests.get(url,headers=headers,timeout=0.001,allow_redirects=False)	allow_redirects=False不允许页面跳转
+	response.status_code	状态码
+	response.url 	请求链接
+	response.text	响应文件内容
+	response.json()	响应json数据
+	response.headers	响应headers数据
+10.	发送数据，请求接口	urllib
+	data=urllib.urlencode(dict)
+	link=url
+	req=urllib2.Request(url=link,data=data)
+	response=urllib2.urlopen(req)
+11.	设置utf-8编码：
+	if sys.getdefaultencoding() != 'utf-8':
+		reloads(sys)
+		sys.setdefaultencoding('utf-8')
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
