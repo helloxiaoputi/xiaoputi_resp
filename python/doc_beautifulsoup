@@ -1,0 +1,40 @@
+1.	安装beautifulsoup
+	pip install beautifulsoup4
+2.	引入库文件
+	from bs4 import BeautifulSoup as bs 
+3.	实例化对象
+	soup = bs(fileMsg,'lxml')	fileMsg是获取到的字符串	lxml是文本快速解析器
+4.	以更直观简洁的格式输出	
+	soup.prettify()
+5.	获取html标签中的文本内容	如获取title	
+	soup.title.text	或 soup.title.string
+6.	获取对应的标签名字
+	soup.title.name
+7.	获取当前标签的上一级标签名字
+	soup.title.parent.name
+8.	获取对应标签中的第一个
+	soup.p
+9.	获取对应标签中的第一个标签指定的属性值
+	soup.p["class"]	或	soup.p.attrs['class']
+10.	获取对应的标签列表  	find_all(name,attrs,recursive,text,**kwargs)
+	1.	name	soup.find_all('a')	
+	2.	arrt	soup.find_all(attrs={'id': 'list-1'})
+	3.	text 	soup.find_all(text='Foo')
+11.	获取某个指定id或者class的标签信息	find(name,attrs,recursive,text,**kwargs)
+	soup.find(id='link3')
+12.	获取指定标签下的某个属性值
+	.get('href')
+13.	获取文本内容
+	.get_text()
+14.	获取对应标签中的第一个标签下所有标签的列表信息
+	.contents
+15.	获取对应标签中的第一个标签下所有标签的列表信息
+	.children	迭代形式		需要使用循环输出（下同）	for i,child in enumerate(soup.p.children):
+16.	获取后面的所有兄弟节点		
+	.next_siblings			迭代使用循环输出
+17.	获取前面的所有兄弟节点		
+	.previous_siblings		迭代使用循环输出
+18.	获取当前对象的子孙节点		
+	.descendants			迭代使用循环输出
+
+	

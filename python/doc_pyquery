@@ -1,0 +1,64 @@
+1.	安装pyquery
+	pip install pyquery
+2.	引入pyquery
+	from pyquery import PyQuery as pq
+3.	初始化对象，含有4种方式		doc相当于jquery中的$符
+	1.字符串：	doc = pq("<html></html>")
+	2.lxml：		from lxml import etree		doc = pq(etree.fromstring("<html></html>"))
+	3.文件：		doc = pq(filename=path_to_html_file)
+	4.链接：		doc = pq(url='http://google.com/')
+4.	获取初始化对象所选择的模块内容
+	doc('#id').html()
+5.	获取多个同名选择器并进行操作
+	data = doc('tr')
+	for tr in data.items():
+		temp = tr('td').eq(2).text()	temp为每个tr下的第3个td中的内容
+6.	获取带有html标签内容的信息
+	.html()
+	
+7.	获取不带html标签的文本内容
+	.text()
+8.	通过选择器来获取目标内容
+	.('selector')
+9.	根据索引号获取指定元素(index从0开始)
+	.eq(index)
+10.	查找嵌套元素
+	.find()
+11.	根据class、id筛选指定元素
+	.filter()
+12.	获取、修改属性值
+	.attr()
+13.	添加class
+	.addClass(value)
+14.	判断是否包含指定的class，返回True或False
+	.hasClass(name)
+15.	获取子元素
+	.children()
+16.	获取父元素
+	.parents()
+17.	获取下一个元素
+	.next()
+18.	获取后面全部元素块
+	nextAll()
+19.	获取所有不匹配选择器的元素
+	not_('selector')
+20.	遍历d中的li元素
+	for i in d.items('li'):
+		print i.text()
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
