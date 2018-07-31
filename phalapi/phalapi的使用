@@ -1,0 +1,60 @@
+1.	通过composer下载phalapi
+	composer create-project phalapi/phalapi
+2.	升级phalapi
+	在composer.json中写入新的版本号
+	{
+	    "require": {
+	        "phalapi/kernal": "2.0.1"
+	    }
+	}
+	然后composer update进行更新
+3.	默认入口位置
+	public/index.php
+4.	访问方式	注意点：?s=Class.Action等效于?service=Class.Action，两者都存在时优先使用service参数
+	1. ?s=Site.Index，省略命名空间，默认使用App
+	2. ?s=App.Site.Index，带有命名空间前缀
+5.	在http协议下进行请求的方式
+	get和post
+6.	改写	?s=命名空间.类名.方法	为	?r=命名空间/类名/方法
+	重写PhalApi\Request::getService()
+	文件位置 ./src/app/Common/Request.php
+	<?php
+	namespace App\Common;
+	class Request extends \PhalApi\Request {
+	    public function getService() {
+	        // 优先返回自定义格式的接口服务名称
+	        $service = $this->get('r');
+	        if (!empty($service)) {
+	            $namespace = count(explode('/', $service)) == 2 ? 'App.' : '';
+	            return $namespace . str_replace('/', '.', $service);
+	        }
+	        return parent::getService();
+	    }
+	}
+	在./config/di.php中进行重新注册	$di->request = new App\Common\Request();
+7.	接口的说明文档注释以及生成
+	访问./public/docs.php可以查看实时自己写的接口文档(注释要正确才能显示)，终端执行php docs.php文件可生成html文件
+8.	中文不被转义在配置文件中重写di
+	$di->response = new \PhalApi\Response\JsonResponse(JSON_UNESCAPED_UNICODE); // 中文显示
+9.	支持jsonp的返回
+	在./config.php中去掉注释下面的注释
+	if (!empty($_GET['callback'])) {
+	    $di->response = new \PhalApi\Response\JsonpResponse($_GET['callback']);
+	}
+9.	开启调试模式
+	1.	单次请求开启调试：默认添加请求参数&__debug__=1
+	2.	全部请求开启调试：把配置文件./Config/sys.php文件中的配置改成'debug' => true,
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,17 @@
+网站地址：https://docs.phpcomposer.com/
+
+1.	安装composer即下载一个可执行命令
+	curl -sS https://getcomposer.org/installer | php
+2.	判断composer是不是正常使用
+	php composer.phar
+3.	编写composer.json依赖文件
+	require
+4.	安装依赖包
+	composer install    在存在composer.json的同级目录下进行执行
+5.	composer.lock
+	安装后会产生这个文件，这个文件含有确切的版本号，当再次安装的时候如果这个文件存在，则会忽略composer.json文件
+	，这样如果团队开发的时候，不管再怎么变，使用的都是同种类型的依赖
+6.	composer update
+	当composer.lock锁文件存在时，要更新全新的依赖进到锁文件中，可以使用上面命令，如果只想安装或更新一个依赖，你可以白名单它们	composer update monolog/monolog [...]
+7.	autoload	
+	库的自动加载

@@ -52,6 +52,14 @@
 	if sys.getdefaultencoding() != 'utf-8':
 		reloads(sys)
 		sys.setdefaultencoding('utf-8')
+12.	安装MySQLdb模块
+	yum install MySQL-python
+13.	python中的urlencode和urldecode	urllib
+	1.urlencode		
+		多个参数可设置成字典，键值对形式，然后使用urllib.urlencode(字典名称)		urllib.urlencode
+		一个参数的时候可以直接使用quote(字符串)		from urllib import quote
+	2.urldecode		
+		可以直接使用urllib.parse.unquote(字符串)		from urllib import unquote
 
 
 
