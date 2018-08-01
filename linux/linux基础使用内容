@@ -22,7 +22,7 @@
 	GRANT ALL PRIVILEGES ON *.* TO '账号'@'ip名' IDENTIFIED BY '密码' WITH GRANT OPTION;
 12.	允许某个ip指定访问某个数据库
 	GRANT ALL PRIVILEGES ON 数据库名.* TO '账号'@'ip名' IDENTIFIED BY '密码' WITH GRANT OPTION;
-13.	清楚数据库权限缓存
+13.	清除数据库权限缓存
 	flush privileges;
 14.	查看系统磁盘文件大小
 	df -h
@@ -30,7 +30,7 @@
 	zip -qr	文件名.zip *	
 16.	打包成某目录并排除某个目录
 	zip -qr 文件名.zip  -x 目录/*
-17.	解压某个zip问价成某个目录
+17.	解压某个zip文件到某个目录
 	unzip  -q  文件名.zip -d 文件名
 18.	计算文件内的单词数或者行数
 	单词数：wc -w 	行数：wc -l
@@ -83,6 +83,9 @@
 	free -m
 42.	实时监测命令(-d表示变化位置高亮，-n表示经过几秒内容更新体现)
 	watch -d -n 1 ls -lh
+43.	查看linux位数
+	getconf LONG_BIT
+	uname -a
 
 
 
