@@ -1,0 +1,2 @@
+1.	case when 条件a then 结果a when 条件b then 结果b else 结果c end
+	CASE sex WHEN '1' THEN '男' WHEN '2' THEN '女' ELSE '其他' END 

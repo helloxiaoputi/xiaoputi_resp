@@ -15,3 +15,5 @@
 	当composer.lock锁文件存在时，要更新全新的依赖进到锁文件中，可以使用上面命令，如果只想安装或更新一个依赖，你可以白名单它们	composer update monolog/monolog [...]
 7.	autoload	
 	库的自动加载
+8.	更改为中国镜像 命令行直接执行
+	composer config -g repo.packagist composer https://packagist.phpcomposer.com

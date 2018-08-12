@@ -1,4 +1,4 @@
-1.	通过composer下载phalapi
+1.	通过composer下载phalapi   
 	composer create-project phalapi/phalapi
 2.	升级phalapi
 	在composer.json中写入新的版本号
@@ -69,8 +69,11 @@
         return array('tel' => $this->tel, 'email' => $this->email);
     } 
     login和regist中的参数只能是自己的，*中的参数可以给所有方法使用,且存在require属性，所以都必须带上这个参数
-    键：type，name，require，default，min，max，desc，source
+    键：type,name,require,default,min,max,desc,source,format,regex,array,range
     如：array('name' => 'username', 'type' => 'string', 'require' => true, 'default' => 'nobody', 'min' => 1, 'max' => 10)
+    format：如果是正文使用min或者max时候会出现字节的问题，所以加上要加上	'format'=>'utf8'
+    regex：	可以用正则表达式来验证传递的参数值是不是符合要求
+    array('name' => 'email', 'regex' => "/^([0-9A-Za-z\\-_\\.]+)@([0-9a-z]+\\.[a-z]{2,3}(\\.[a-z]{2})?)$/i")
 12.	链接中必须存在的参数和可有可无的参数设置
 	在./config/app.php中进行配置
     'apiCommonRules' => array(
@@ -83,6 +86,54 @@
             'name' => 'version', 'default' => '1.4.0', 
         ),
     ),
+13.	数据库操作	需要使用Api层，Domain层，Model层
+	流程：1.	请求：api->domain->model 	2. 返回：model->domain->api
+	语句颇多，不具体列举，可参考官方手册
+	http://docs.phalapi.net/#/v2.0/model
+14.	获取配置文件中./config/app.php中的配置常量
+	\PhalApi\DI()->config->get('app')
+	若配置文件中没有这个变量，可设置默认值
+	\PhalApi\DI()->config->get('app.not_found', 404);
+15.	文件缓存
+	开启： $di->cache = new \PhalApi\Cache\FileCache(array('path' => API_ROOT . '/runtime', 'prefix' => 'demo'));
+	\PhalApi\DI()->cache->set('thisYear', 2018);
+	\PhalApi\DI()->cache->get('thisYear');
+16.	Memcached缓存	尽量不再使用memcache缓存，在php7中已经逐渐不再支持该缓存
+	开启：$di->cache = new \PhalApi\Cache\MemcachedCache(DI()->config->get('sys.mc'));
+	sys.mc在./config中的sys.php中配置
+17.	Redis缓存
+	开启：$config = array('host' => '127.0.0.1', 'port' => 6379);
+	$di->cache = new \PhalApi\Cache\RedisCache($config);
+18.	过滤器：使用md5签名
+	开启：$di->filter = new \PhalApi\Filter\SimpleMD5Filter();
+	使用接口时需要加上参数sign，如果sign的值不知道可以通过访问接口在错误日志中找到该值
+	存在不需要签名的接口，可在app.php配置白名单service_whitelist
+    'service_whitelist' => array(
+        '*.Index',           // 全部的Index方法
+        'Test.*',            // Api_Test的全部方法
+        'User.GetBaseInfo',  // Api_User::GetBaseInfo()方法
+    ),
+    命名空间单独配置
+	'service_whitelist' => array(
+        'Site.Index',
+        // 以命名空间名称为key
+        'App' => array(
+            // 在这里，单独配置……
+        ),
+    ),
+19.	cookie的使用
+	$config = array('domain' => 'localhost','path'=>'/phalapi/public', 'crypt' => new App\Common\Base64Crypt());
+	开启：$di->cookie = new PhalApi\Cookie\MultiCookie($config);
+	设置：\PhalApi\DI()->cookie->set('name', 'phalapi', $_SERVER['REQUEST_TIME'] + 86400);
+	读取：\PhalApi\DI()->cookie->get('name');
+20.	语言包设置
+	在./public/init.php中
+	直接设置：\PhalApi\SL('zh_cn')
+	动态设置：\PhalApi\SL(isset($_GET['lan'] ? $_GET['lan'] : 'zh_cn');
+21. 请求接口数据
+	$curl = new \PhalApi\CUrl(2);
+	get：$rs = $curl->get('http://demo2.phalapi.net/?username=dogstar', 3000);
+	post：$rs = $curl->post('http://demo2.phalapi.net/?', array('username' => 'dogstar'), 3000);
 
 
 
